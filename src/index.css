@@ -1,5 +1,51 @@
-body {
+
+@import url('https://fonts.googleapis.com/css?family=Arimo');
+
+body, html, #root {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Arimo', sans-serif;
+  width: 100%;
+  height: 100%;
 }
+
+.app-container {
+  width: 100%;
+  height: 100%;
+  background-color: #f0ecec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-container .login-tile {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 7px -3px #949494;
+  text-align: center;
+}
+
+button {
+  text-transform: uppercase;
+  width: 200px;
+  height: 50px;
+  font-size: 1rem;
+  letter-spacing: 5px;
+  border: 2px solid #29D9C2;
+  color: #fff;
+  border-radius: 40px;
+  background: #29D9C2;
+  outline: none;
+  margin-top: 15px;
+  transition: background ease-in 0.1s;
+}
+
+button:hover {
+  background:#2F2933;
+  color: #fff;
+  cursor: pointer;
+  border-color: #fff;
+}
+
+

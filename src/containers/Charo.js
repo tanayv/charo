@@ -2,39 +2,39 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { 
-    startLogin
+    setRequestUrl
 } from '../actions/index';
+import RouteHandler from './RouteHandler';
 
 class Charo extends Component {
     constructor(props) {
         super(props);
-        this.handleClick = this.handleClick.bind(this);
+        props.setRequestUrl(props.requestUrl);
     }
 
     render() {
         return (
-            <div onClick={this.handleClick}>Charo Life</div>
+            <div className='app-container'>
+                <RouteHandler requestUrl={this.props.requestUrl}/>
+            </div>
         )
-    }
-
-    handleClick() {
-        console.log("Wassa");
-        this.props.loginPutain();
     }
 }
 
+
+
 const mapStateToProps = (state, ownProps) => ({
+    requestUrl: state.requestUrl
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  startLogin: () => {
-    dispatch(startLogin());
+  setRequestUrl: () => {
+      dispatch(setRequestUrl());
   }
-  
 })
 
 Charo.propTypes = {
-    startLogin: PropTypes.func.isRequired
+    requestUrl: PropTypes.string
 }
 
 export default connect(

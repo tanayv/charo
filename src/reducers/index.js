@@ -1,30 +1,19 @@
 import { combineReducers } from 'redux'
 import {
-    RECEIVE_HASH_FRAGMENT,
-    START_AUTHORIZATION_REQUEST,
+    SET_REQUEST_URL
 } from '../actions/index'
 
-function parsedHashFragment(state = '', action) {
+function requestUrl(state = '', action) {
     switch (action.type) {
-        case RECEIVE_HASH_FRAGMENT:
-            return action.hashFragment
-        default:
-            return state
-    } 
-}
-
-function startLogin(state = '', action) {
-    switch(action.type) {
-        case START_AUTHORIZATION_REQUEST:
-            return action.loginStarted;
-        default:
+        case SET_REQUEST_URL: 
+            return action.requestUrl
+        default: 
             return state
     }
 }
 
 const rootReducer = combineReducers({
-    parsedHashFragment,
-    startLogin
+    requestUrl
 })
 
 export default rootReducer
