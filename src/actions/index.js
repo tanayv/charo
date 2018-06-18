@@ -9,7 +9,7 @@ export function setRequestUrl(redirectUrl) {
         "baseUrl": "https://accounts.spotify.com/authorize",
         "urlParams": {
             "client_id": "804e43256299432b8e9401998ec9e22b",
-            "redirect_uri": window.location.href,
+            "redirect_uri": window.location.href + "callback/",
             "scopes": [
                 "user-read-currently-playing",
                 "user-read-playback-state"
@@ -23,7 +23,7 @@ export function setRequestUrl(redirectUrl) {
         out.push(key + '=' + encodeURIComponent(loginConfig.urlParams[key]));
     }
     var requestUrl = loginConfig.baseUrl + "?" + out.join('&');
-
+    console.log(loginConfig);
     return {
         type: SET_REQUEST_URL,
         requestUrl: requestUrl
