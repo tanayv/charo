@@ -10,8 +10,8 @@ export default class Login extends Component {
   render() {
     return (
         <div className="login-tile">
-            <h1>To use Charo, log in to your Spotify account</h1>
-            <button className="button purple" onClick={this.performRedirect}>Login</button>
+            <h1>Login with your Spotify account</h1>
+            <button className="button purple" onClick={this.performRedirect}>Connect</button>
         </div>
     )
   }

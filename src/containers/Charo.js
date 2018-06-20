@@ -2,20 +2,23 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { 
-    setRequestUrl
+    setRequestUrl,
+    parseCurrentUrl
 } from '../actions/index';
 import RouteHandler from './RouteHandler';
 
 class Charo extends Component {
     constructor(props) {
         super(props);
-        props.setRequestUrl(props.requestUrl);
+        props.setRequestUrl();
+        props.parseCurrentUrl();
+        
     }
 
     render() {
         return (
             <div className='app-container'>
-                <RouteHandler requestUrl={this.props.requestUrl}/>
+                <RouteHandler routeData={this.props}/>
             </div>
         )
     }
@@ -24,12 +27,17 @@ class Charo extends Component {
 
 
 const mapStateToProps = (state, ownProps) => ({
-    requestUrl: state.requestUrl
+    requestUrl: state.requestUrl,
+    parsedUrlData: state.parsedUrlData,
+    accountConnected: state.accountConnected
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   setRequestUrl: () => {
       dispatch(setRequestUrl());
+  },
+  parseCurrentUrl: () => {
+      dispatch(parseCurrentUrl());
   }
 })
 
