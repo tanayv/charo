@@ -1,6 +1,14 @@
 
+import axios from 'axios';
+
 export const SET_REQUEST_URL = 'SET_REQUEST_URL';
 export const PARSE_CURRENT_URL = 'PARSE_CURRENT_URL';
+
+export const GET_CURRENT_PLAYBACK = 'GET_CURRENT_PLAYBACK';
+export const PENDING_CURRENT_PLAYBACK = 'PENDING_CURRENT_PLAYBACK'
+export const STORE_CURRENT_PLAYBACK = 'STORE_CURRENT_PLAYBACK';
+
+export const REQUEST_FAILED = 'REQUEST_FAILED';
 
 /** Basically the capitalized actions defined as functions with an optional extra return value */
 
@@ -10,10 +18,7 @@ export function setRequestUrl() {
         "urlParams": {
             "client_id": "804e43256299432b8e9401998ec9e22b",
             "redirect_uri": window.location.href + "callback/",
-            "scopes": [
-                "user-read-currently-playing",
-                "user-read-playback-state"
-            ],
+            "scope": "user-read-currently-playing user-read-playback-state",
             "response_type": "token",
             "state": "6716F7FB8B9185A504B97FFAB87720B90D5E0CFCA48978A3827126F382D2093D"
         }
@@ -61,6 +66,46 @@ export function parseCurrentUrl() {
         type: PARSE_CURRENT_URL,
         urlData: data
     };
+}
+
+export function getCurrentPlayback(accessToken) {
+
+    var config = {
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        }
+    }
+
+    var endpoint = 'https://api.spotify.com/v1/me/player';
+
+
+
+    return (dispatch) => {
+
+        dispatch({
+            type: PENDING_CURRENT_PLAYBACK
+        });
+
+        axios.get(endpoint, config)
+        .then(
+            (response) => {
+                console.log(response);
+                dispatch({
+                    type: STORE_CURRENT_PLAYBACK,
+                    playbackData: response.data || ""
+                });
+            },
+            (errorMsg) => {
+                dispatch({
+                    type: REQUEST_FAILED,
+                    error: errorMsg
+                });
+            }
+        )
+
+
+    }
+
 }
 
 

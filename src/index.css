@@ -9,6 +9,10 @@ body, html, #root {
   height: 100%;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .app-container {
   width: 100%;
   height: 100%;
@@ -32,10 +36,10 @@ button {
   height: 50px;
   font-size: 1rem;
   letter-spacing: 2px;
-  border: 2px solid #29D9C2;
+  border: 2px solid #2196f3;
   color: #fff;
   border-radius: 40px;
-  background: #29D9C2;
+  background: #2196f3;
   outline: none;
   margin-top: 15px;
   transition: background ease-in 0.1s;
@@ -46,6 +50,81 @@ button:hover {
   color: #fff;
   cursor: pointer;
   border-color: #fff;
+}
+
+.player-container {
+  width: 80%;
+  height: 70%;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 3px 3px 7px -3px #949494;
+}
+
+.left-panel {
+  width: 30%;
+  height: 100%;
+  display: inline-block;
+  background: #2F2933;
+  position: relative;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  vertical-align: top;
+  padding: 30px;
+  color: #f0ecec;
+}
+
+.right-panel {
+  width: 70%;
+  height: 100%;
+  display: inline-flex;
+  position: relative;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 30px 15px;
+  align-content: center;
+  justify-content: center;
+  vertical-align: top;
+  background: #2196f3;
+}
+
+.lyrics-container {
+  width: calc(50% - 20px);
+  height: 100%;
+  background-color: #fff;
+  display: inline-block;
+  vertical-align: top;
+  box-shadow: 3px 3px 7px -3px #94949493;
+  margin-left: 20px;
+}
+
+.lyrics-container:first-of-type {
+  margin-left: 0;
+}
+
+.album-art {
+  width: 200px;
+  height: 200px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+
+.left-panel h1.song-title {
+  margin: 15px 0 0 0;
+  text-align: center;
+  width: 100%;
+  font-size: 1.4rem;
+}
+
+.left-panel h2.artist-name {
+  margin: 5px 0 0 0;
+  text-align: center;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0.75;
 }
 
 

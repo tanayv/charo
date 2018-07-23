@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux'
 import {
     SET_REQUEST_URL,
-    PARSE_CURRENT_URL
+    PARSE_CURRENT_URL,
+    STORE_CURRENT_PLAYBACK,
+    PENDING_CURRENT_PLAYBACK
 } from '../actions/index'
 
 function requestUrl(state = '', action) {
@@ -25,7 +27,23 @@ function parsedUrlData(state = '', action) {
 function accountConnected(state = false, action) {
     switch (action.type) {
         case PARSE_CURRENT_URL:
-            return action.urlData.access_token != null
+            if (action.urlData.access_token != null) {
+                return action.urlData.access_token != null
+            }
+            else
+                return state;
+        default: 
+            return state
+    }
+}
+
+function currentPlayback(state = '', action) {
+    console.log("scp" + action)
+    switch (action.type) {
+        case PENDING_CURRENT_PLAYBACK: 
+            return "Pending";
+        case STORE_CURRENT_PLAYBACK:
+            return action.playbackData
         default: 
             return state
     }
@@ -34,7 +52,8 @@ function accountConnected(state = false, action) {
 const rootReducer = combineReducers({
     requestUrl,
     parsedUrlData,
-    accountConnected
+    accountConnected,
+    currentPlayback
 })
 
 export default rootReducer
