@@ -17,7 +17,7 @@ export function setRequestUrl() {
         "baseUrl": "https://accounts.spotify.com/authorize",
         "urlParams": {
             "client_id": "804e43256299432b8e9401998ec9e22b",
-            "redirect_uri": window.location.href + "callback/",
+            "redirect_uri": window.location.href + "",
             "scope": "user-read-currently-playing user-read-playback-state",
             "response_type": "token",
             "state": "6716F7FB8B9185A504B97FFAB87720B90D5E0CFCA48978A3827126F382D2093D"

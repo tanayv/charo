@@ -1,22 +1,25 @@
 {
   "name": "charo",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "axios": "^0.18.0",
-    "prop-types": "^15.6.1",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-redux": "^5.0.7",
-    "react-scripts": "1.1.4",
-    "redux": "^4.0.0",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tanayv/charo.git"
+  },
+  "author": "Tanay Vardhan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tanayv/charo/issues"
+  },
+  "homepage": "https://github.com/tanayv/charo#readme",
+  "dependencies": {
+    "express": "^4.16.3"
   }
 }
