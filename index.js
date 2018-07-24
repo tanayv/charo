@@ -23,8 +23,12 @@ app.use(function(req, res, next) {
     next();
 });
 
+/** Define API Route */
+var apiRouter = require("./routes/api");
+app.use("/api/", apiRouter);
+
 /* Serve react frontend */
-app.use(express.static(path.join(__dirname, "react", 'build')));
+app.use(express.static(path.join(__dirname, "react", "build")));
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, "react", "build", "index.html"));
 });
