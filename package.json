@@ -23,6 +23,9 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
-    "path": "^0.12.7"
+    "lyricist": "^2.2.2",
+    "npm": "^6.2.0",
+    "path": "^0.12.7",
+    "spotify-web-api-node": "^3.1.1"
   }
 }
