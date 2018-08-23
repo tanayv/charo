@@ -3,7 +3,8 @@ import {
     SET_REQUEST_URL,
     PARSE_CURRENT_URL,
     STORE_CURRENT_PLAYBACK,
-    PENDING_CURRENT_PLAYBACK
+    PENDING_CURRENT_PLAYBACK,
+    AUTH_STORAGE
 } from '../actions/index'
 
 function requestUrl(state = '', action) {
@@ -38,7 +39,6 @@ function accountConnected(state = false, action) {
 }
 
 function currentPlayback(state = '', action) {
-    console.log("scp" + action)
     switch (action.type) {
         case PENDING_CURRENT_PLAYBACK: 
             return "Pending";
@@ -49,11 +49,21 @@ function currentPlayback(state = '', action) {
     }
 }
 
+function storeAuthData(state = '', action) {
+    switch (action.type) {
+        case AUTH_STORAGE: 
+            return action.success;
+        default: 
+            return state
+    }
+}
+
 const rootReducer = combineReducers({
     requestUrl,
     parsedUrlData,
     accountConnected,
-    currentPlayback
+    currentPlayback,
+    storeAuthData
 })
 
 export default rootReducer

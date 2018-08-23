@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "cd react && npm start"
+    "test": "cd react && npm start",
+    "build": "cd react && npm run build"
   },
   "repository": {
     "type": "git",

@@ -9,3 +9,25 @@ var spotify = new spotifyAPI({
     clientSecret: CLIENT_SECRET,
     redirectUri: 'https://charognard.herokuapp.com/callback'
 })
+
+var token = "";
+var expires = 0;
+
+var getPlayback = (callback) => {
+    spotify.getMyCurrentPlaybackState({})
+    .then(function(data) {
+        callback(data.body)
+    }, function(err) {
+        callback({})
+        console.log("There was an error " + err);
+    });
+}
+
+var parseCallback = (req) => {
+    console.log(req.query);
+}
+
+module.exports = {
+    getPlayback,
+    parseCallback
+}

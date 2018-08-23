@@ -10,6 +10,8 @@ export const STORE_CURRENT_PLAYBACK = 'STORE_CURRENT_PLAYBACK';
 
 export const REQUEST_FAILED = 'REQUEST_FAILED';
 
+export const AUTH_STORAGE = 'AUTH_STORAGE';
+
 /** Basically the capitalized actions defined as functions with an optional extra return value */
 
 export function setRequestUrl() {
@@ -17,7 +19,7 @@ export function setRequestUrl() {
         "baseUrl": "https://accounts.spotify.com/authorize",
         "urlParams": {
             "client_id": "804e43256299432b8e9401998ec9e22b",
-            "redirect_uri": window.location.href + "",
+            "redirect_uri": "http://localhost:3000/auth/callback/",
             "scope": "user-read-currently-playing user-read-playback-state",
             "response_type": "token",
             "state": "6716F7FB8B9185A504B97FFAB87720B90D5E0CFCA48978A3827126F382D2093D"
@@ -61,11 +63,11 @@ export function parseCurrentUrl() {
         data[n].push(nv.length === 2 ? v : null);
     }
     
+    /** Some way to leave the application or make a POST request to the API */
     
-    return {
-        type: PARSE_CURRENT_URL,
-        urlData: data
-    };
+    return (dispatch) => {
+        dispatch(storeAuthData(data));
+    }
 }
 
 export function getCurrentPlayback(accessToken) {
@@ -106,6 +108,27 @@ export function getCurrentPlayback(accessToken) {
 
     }
 
+}
+
+export function storeAuthData(authData) {
+    return (dispatch) => {
+        axios.post("http://localhost:8000/api/auth/store", {authData: authData})
+            .then(
+                (response) => {
+                    console.log(response);
+                    dispatch({
+                        type: AUTH_STORAGE,
+                        success: true
+                    });
+                },
+                () => {
+                    dispatch({
+                        type: AUTH_STORAGE,
+                        success: false
+                    });
+                }
+            )
+    }
 }
 
 
