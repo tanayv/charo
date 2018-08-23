@@ -13,8 +13,8 @@ var spotify = new spotifyAPI({
 var token = "";
 var expires = 0;
 
-var getPlayback = (callback) => {
-    spotify.getMyCurrentPlaybackState({})
+var getPlayback = (accessToken, callback) => {
+    spotify.getMyCurrentPlaybackState({accessToken})
     .then(function(data) {
         callback(data.body)
     }, function(err) {
