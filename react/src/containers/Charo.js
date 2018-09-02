@@ -11,7 +11,6 @@ class Charo extends Component {
     constructor(props) {
         super(props);
         props.setRequestUrl();
-        props.parseCurrentUrl();
     }
 
     render() {
@@ -24,9 +23,7 @@ class Charo extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    requestUrl: state.requestUrl,
-    parsedUrlData: state.parsedUrlData,
-    accountConnected: state.accountConnected,
+    requestUrl: state.requestUrl
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

@@ -4,10 +4,6 @@ import axios from 'axios';
 export const SET_REQUEST_URL = 'SET_REQUEST_URL';
 export const PARSE_CURRENT_URL = 'PARSE_CURRENT_URL';
 
-export const GET_CURRENT_PLAYBACK = 'GET_CURRENT_PLAYBACK';
-export const PENDING_CURRENT_PLAYBACK = 'PENDING_CURRENT_PLAYBACK'
-export const STORE_CURRENT_PLAYBACK = 'STORE_CURRENT_PLAYBACK';
-
 export const REQUEST_FAILED = 'REQUEST_FAILED';
 
 export const AUTH_STORAGE = 'AUTH_STORAGE';
@@ -70,45 +66,6 @@ export function parseCurrentUrl() {
     }
 }
 
-export function getCurrentPlayback(accessToken) {
-
-    var config = {
-        headers: {
-            'Authorization': 'Bearer ' + accessToken
-        }
-    }
-
-    var endpoint = 'https://api.spotify.com/v1/me/player';
-
-
-
-    return (dispatch) => {
-
-        dispatch({
-            type: PENDING_CURRENT_PLAYBACK
-        });
-
-        axios.get(endpoint, config)
-        .then(
-            (response) => {
-                console.log(response);
-                dispatch({
-                    type: STORE_CURRENT_PLAYBACK,
-                    playbackData: response.data || ""
-                });
-            },
-            (errorMsg) => {
-                dispatch({
-                    type: REQUEST_FAILED,
-                    error: errorMsg
-                });
-            }
-        )
-
-
-    }
-
-}
 
 export function storeAuthData(authData) {
     return (dispatch) => {

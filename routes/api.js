@@ -9,15 +9,18 @@ var router = express.Router();
 var axios = require("axios");
 var genius_api = require("genius-api");
 const Lyricist = require('lyricist/node6');
-var geniusAccessToken = "<GENIUS_ACCESS_TOKEN>";
+var geniusAccessToken = "<GENIUS_API_ACCESS_TOKEN>";
 var lyricist = new Lyricist(geniusAccessToken);
+
 
 
 var spotify = require("./../controllers/spotify");
 //var genius = require("./../controllers/genius");
 
 var genius = new genius_api(geniusAccessToken);
-var translator = require("./../controllers/translate");
+var translator = require("google-translate-api");
+
+
 
 var authData = {};
 
@@ -38,12 +41,24 @@ router.get("/playback", (req, res) => {
                     songId = response.hits[0].result.id;
                     lyricist.song(songId, { fetchLyrics: true }).then(
                         (lyrics) => {
-                            res.json({
-                                "spotify": spotifyData,
-                                "genius": response,
-                                "geniusSongId": songId,
-                                "lyrics": lyrics
+
+
+                            var abc = lyrics;
+
+                            translator(abc, {to: 'en'}).then(glot => {
+                                console.log("glot", glot);
+                                res.json({
+                                    "spotify": spotifyData,
+                                    "genius": response,
+                                    "geniusSongId": songId,
+                                    "lyrics": lyrics,
+                                    "translation": glot.text
+                                });
+                            }).catch(err => {
+                                console.error(err);
                             });
+
+
                         }
                     )
 
