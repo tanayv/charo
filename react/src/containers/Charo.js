@@ -17,6 +17,7 @@ class Charo extends Component {
     render() {
         return (
             <div className='app-container'>
+                <div className='back-header'></div>
                 <RouteHandler routeData={this.props}/>
             </div>
         )

@@ -17,17 +17,33 @@ body, html, #root {
   width: 100%;
   height: 100%;
   background-color: #f0ecec;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding-top: 50px;
+  position: relative;
+  text-align: center;
 }
 
-.app-container .login-tile {
+.app-container .back-header {
+  height: 30%;
+  width: 100%;
+  background-color: #110f3e;
+  background-image: url('./fleur.png');
+  position: fixed;
+  background-size: 3%;
+  z-index: 0;
+  top: 0;
+}
+
+.app-container .tile {
   background-color: #fff;
   padding: 30px;
   border-radius: 5px;
   box-shadow: 3px 3px 7px -3px #949494;
   text-align: center;
+  position: relative;
+  z-index: 10;
+  width: 90%;
+  margin: 0 auto;
+  height: 90%;
 }
 
 button {
@@ -50,41 +66,6 @@ button:hover {
   color: #fff;
   cursor: pointer;
   border-color: #fff;
-}
-
-.player-container {
-  width: 80%;
-  height: 70%;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 3px 3px 7px -3px #949494;
-}
-
-.left-panel {
-  width: 30%;
-  height: 100%;
-  display: inline-block;
-  background: #2F2933;
-  position: relative;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  vertical-align: top;
-  padding: 30px;
-  color: #f0ecec;
-}
-
-.right-panel {
-  width: 70%;
-  height: 100%;
-  display: inline-flex;
-  position: relative;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  padding: 30px 15px;
-  align-content: center;
-  justify-content: center;
-  vertical-align: top;
-  background: #2196f3;
 }
 
 .lyrics-container {
@@ -111,14 +92,14 @@ button:hover {
   border-radius: 5px;
 }
 
-.left-panel h1.song-title {
+h1.song-title {
   margin: 15px 0 0 0;
   text-align: center;
   width: 100%;
   font-size: 1.4rem;
 }
 
-.left-panel h2.artist-name {
+h2.song-artist {
   margin: 5px 0 0 0;
   text-align: center;
   width: 100%;
@@ -127,4 +108,15 @@ button:hover {
   opacity: 0.75;
 }
 
+.nav {
+  width: 100%;
+  border-bottom: 1px solid #c2c2c2;
+  color: #2F2933;
+}
 
+.nav .option {
+  display: inline-block;
+  width: calc(100% / 3);
+  text-align: center;
+  padding: 10px;
+}

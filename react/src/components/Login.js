@@ -9,7 +9,7 @@ export default class Login extends Component {
 
   render() {
     return (
-        <div className="login-tile">
+        <div className="tile">
             <h1>Login with your Spotify account</h1>
             <button className="button purple" onClick={this.performRedirect}>Connect</button>
         </div>

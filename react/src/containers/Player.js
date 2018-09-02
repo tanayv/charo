@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AlbumArt from './../components/AlbumArt';
+import Nav from './Nav';
 import { 
     getPaybackPayload
 } from '../actions/index';
@@ -14,24 +15,34 @@ class Player extends Component {
 
 
   render() {
-    var songTitle = "";
-    var albumArtUrl = "";
-    var artistName = "";
-    console.log(this.props.playbackData);
 
-    return(
-        <div className="player-container">
-            <div className="left-panel">
+    if (this.props.playbackData.spotify) {
+        var songTitle = this.props.playbackData.spotify.item.name;
+        var albumArtUrl = this.props.playbackData.spotify.item.album.images[0].url;
+        var artistName = this.props.playbackData.spotify.item.album.artists[0].name;
+    
+        return(
+            <div className="tile">
+                <Nav/>
                 <AlbumArt url={albumArtUrl}></AlbumArt>
-                {songTitle} {artistName}
-            </div>
-            <div className="right-panel">
-                <div className="lyrics-container">
-                    LYRICS WILL GO HERE
+                <h1 className="song-title">{songTitle}</h1> 
+                <h2 className="song-artist">{artistName}</h2>
+                <div className="right-panel">
+                    <div className="lyrics-container">
+                        LYRICS WILL GO HERE
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
+
+    else {
+        return (
+            <div className="tile">
+                Loading Song Data
+            </div>
+        )
+    }
   }
 }
 
@@ -42,7 +53,6 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     getPlaybackData: () => {
-        console.log("Player.js has made request to fetch playback by dispatching action");
         dispatch(getPaybackPayload());
     },
 })

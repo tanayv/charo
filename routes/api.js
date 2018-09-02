@@ -37,7 +37,7 @@ router.get("/playback", (req, res) => {
                 var songName = response.data.item.name;
                 var spotifyData = response.data;
                 res.json({
-                    "spotify": spotifyData
+                    "spotify": spotifyData,
                 });
                 /*
                 genius.search(songName).then(function(response) {
