@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux'
 import {
     SET_REQUEST_URL,
-    PARSE_CURRENT_URL,
-    AUTH_STORAGE
+    PARSE_RESPONSE_URL,
+    STORE_AUTH_DATA,
+    GET_PLAYBACK_PAYLOAD
 } from '../actions/index'
 
 function requestUrl(state = '', action) {
@@ -16,17 +17,26 @@ function requestUrl(state = '', action) {
 
 function parsedUrlData(state = '', action) {
     switch (action.type) {
-        case PARSE_CURRENT_URL:
+        case PARSE_RESPONSE_URL:
             return action.urlData;
         default: 
             return state;
     }
 }
 
-function storeAuthData(state = '', action) {
+function authenticationStatus(state = '', action) {
     switch (action.type) {
-        case AUTH_STORAGE: 
+        case STORE_AUTH_DATA: 
             return action.success;
+        default: 
+            return state
+    }
+}
+
+var playbackPayload = (state = '', action) => {
+    switch(action.type) {
+        case GET_PLAYBACK_PAYLOAD:
+            return action.data;
         default: 
             return state
     }
@@ -35,7 +45,7 @@ function storeAuthData(state = '', action) {
 const rootReducer = combineReducers({
     requestUrl,
     parsedUrlData,
-    storeAuthData
+    authenticationStatus
 })
 
 export default rootReducer

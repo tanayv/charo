@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { 
     setRequestUrl,
-    parseCurrentUrl
+    parseResponseUrl
 } from '../actions/index';
 import RouteHandler from './RouteHandler';
 
@@ -11,6 +11,7 @@ class Charo extends Component {
     constructor(props) {
         super(props);
         props.setRequestUrl();
+        props.parseResponseHashFragment();
     }
 
     render() {
@@ -23,16 +24,17 @@ class Charo extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    requestUrl: state.requestUrl
+    requestUrl: state.requestUrl,
+    authDataStored: state.authenticationStatus
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   setRequestUrl: () => {
       dispatch(setRequestUrl());
   },
-  parseCurrentUrl: () => {
-      dispatch(parseCurrentUrl());
-  },
+  parseResponseHashFragment: () => {
+      dispatch(parseResponseUrl());
+  }
 })
 
 Charo.propTypes = {

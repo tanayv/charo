@@ -73,11 +73,6 @@ router.get("/playback", (req, res) => {
         )
 });
 
-router.get("/callback/*:data", (req, res) => {
-    console.log("HELLO");
-    console.log(req.params.data);
-    res.json({"hi": "Hello"});
-});
 
 router.post("/auth/store", (req, res) => {
     
@@ -95,11 +90,6 @@ router.post("/auth/store", (req, res) => {
         });
     }
 })
-
-router.get("/auth", (req, res) => {
-    res.json(authData);
-})
-
 
 
 

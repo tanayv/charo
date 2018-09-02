@@ -5,7 +5,7 @@ import Player from './Player';
 export default class RouteHandler extends Component {
 
   render() {
-    if (this.props.routeData.accountConnected)
+    if (this.props.routeData.authenticationStatus)
         return (
             <Player/>
         )

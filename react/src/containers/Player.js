@@ -4,17 +4,11 @@ import AlbumArt from './../components/AlbumArt';
 
 class Player extends Component {
 
-    constructor(props) {
-        super(props);
-    }
 
   render() {
-
     var songTitle = "";
     var albumArtUrl = "";
     var artistName = "";
-
-    
 
     return(
         <div className="player-container">
@@ -35,7 +29,7 @@ class Player extends Component {
 
 
 const mapStateToProps = (state, ownProps) => ({
-
+    
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

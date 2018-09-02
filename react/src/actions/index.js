@@ -2,14 +2,17 @@
 import axios from 'axios';
 
 export const SET_REQUEST_URL = 'SET_REQUEST_URL';
-export const PARSE_CURRENT_URL = 'PARSE_CURRENT_URL';
-
+export const PARSE_RESPONSE_URL = 'PARSE_RESPONSE_URL';
 export const REQUEST_FAILED = 'REQUEST_FAILED';
+export const STORE_AUTH_DATA = 'STORE_AUTH_DATA';
+export const AUTHENTICATED = 'AUTHENTICATED';
+export const GET_PLAYBACK_PAYLOAD = 'GET_PLAYBACK_PAYLOAD';
 
-export const AUTH_STORAGE = 'AUTH_STORAGE';
 
-/** Basically the capitalized actions defined as functions with an optional extra return value */
-
+/**
+ * Defines request parameters sent to the Spotify Authorization API by  setting the URL which is called once the authentication button is clicked
+ * 
+ */
 export function setRequestUrl() {
     var loginConfig = {
         "baseUrl": "https://accounts.spotify.com/authorize",
@@ -34,7 +37,10 @@ export function setRequestUrl() {
 
 }
 
-export function parseCurrentUrl() {
+/**
+ * This action is used after the Spotify API redirects back to this application. It parses the return hash fragment and communicates all the parsed data to the backend
+*/
+export function parseResponseUrl() {
     
     var url = window.location.href;
 
@@ -46,7 +52,7 @@ export function parseCurrentUrl() {
 
     if (query === url || query === "") 
     return {
-        type: PARSE_CURRENT_URL,
+        type: PARSE_RESPONSE_URL,
         urlData: []
     };;
 
@@ -66,22 +72,47 @@ export function parseCurrentUrl() {
     }
 }
 
-
+/**
+ * Makes a POST request to the backend /api/auth/store to store the response parsed from the hash fragments and send it to the backend
+ * @param {Object} authData
+ */
 export function storeAuthData(authData) {
     return (dispatch) => {
         axios.post("http://localhost:8000/api/auth/store", {authData: authData})
             .then(
                 (response) => {
-                    console.log(response);
                     dispatch({
-                        type: AUTH_STORAGE,
+                        type: STORE_AUTH_DATA,
                         success: true
                     });
                 },
                 () => {
                     dispatch({
-                        type: AUTH_STORAGE,
+                        type: STORE_AUTH_DATA,
                         success: false
+                    });
+                }
+            )
+    }
+}
+
+/**
+ * Makes a GET request to the playback endpoint and receive all payloads from the backend
+ */
+export var getPaybackPayload = () => {
+    return (dispatch) => {
+        axios.get("http://localhost:8000/api/playback")
+            .then(
+                (response) => {
+                    dispatch({
+                        type: GET_PLAYBACK_PAYLOAD,
+                        data: response
+                    });
+                },
+                () => {
+                    dispatch({
+                        type: GET_PLAYBACK_PAYLOAD,
+                        data: {}
                     });
                 }
             )
