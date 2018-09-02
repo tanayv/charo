@@ -5,10 +5,11 @@ import Player from './Player';
 export default class RouteHandler extends Component {
 
   render() {
-    if (this.props.routeData.authenticationStatus)
+    if (this.props.routeData.authDataStored) {
         return (
             <Player/>
         )
+    }
     else
         return (
             <Login requestUrl={this.props.routeData.requestUrl}/>

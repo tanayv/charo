@@ -29,7 +29,6 @@ export function setRequestUrl() {
         out.push(key + '=' + encodeURIComponent(loginConfig.urlParams[key]));
     }
     var requestUrl = loginConfig.baseUrl + "?" + out.join('&');
-    console.log(loginConfig);
     return {
         type: SET_REQUEST_URL,
         requestUrl: requestUrl
@@ -99,14 +98,15 @@ export function storeAuthData(authData) {
 /**
  * Makes a GET request to the playback endpoint and receive all payloads from the backend
  */
-export var getPaybackPayload = () => {
+export const getPaybackPayload = () => {
+    console.log("Fetching playback data from backend");
     return (dispatch) => {
         axios.get("http://localhost:8000/api/playback")
             .then(
                 (response) => {
                     dispatch({
                         type: GET_PLAYBACK_PAYLOAD,
-                        data: response
+                        data: response.data
                     });
                 },
                 () => {

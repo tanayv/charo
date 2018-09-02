@@ -45,7 +45,8 @@ var playbackPayload = (state = '', action) => {
 const rootReducer = combineReducers({
     requestUrl,
     parsedUrlData,
-    authenticationStatus
+    authenticationStatus,
+    playbackPayload
 })
 
 export default rootReducer

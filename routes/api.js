@@ -36,6 +36,10 @@ router.get("/playback", (req, res) => {
             (response) => {
                 var songName = response.data.item.name;
                 var spotifyData = response.data;
+                res.json({
+                    "spotify": spotifyData
+                });
+                /*
                 genius.search(songName).then(function(response) {
 
                     songId = response.hits[0].result.id;
@@ -63,7 +67,7 @@ router.get("/playback", (req, res) => {
                     )
 
                     
-                });
+                });*/
                 
             },
             (error) => {
