@@ -109,7 +109,8 @@ h2.song-artist {
 }
 
 .nav {
-  width: 100%;
+  width: calc(100% + 60px);
+  margin: -30px -30px 30px -30px;
   border-bottom: 1px solid #c2c2c2;
   color: #2F2933;
 }
@@ -119,4 +120,9 @@ h2.song-artist {
   width: calc(100% / 3);
   text-align: center;
   padding: 10px;
+  border-bottom: 2px solid #f0ecec;
+}
+
+.nav .option.selected {
+  border-bottom: 2px solid #110f3e;
 }

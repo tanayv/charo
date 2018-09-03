@@ -27,11 +27,6 @@ class Player extends Component {
                 <AlbumArt url={albumArtUrl}></AlbumArt>
                 <h1 className="song-title">{songTitle}</h1> 
                 <h2 className="song-artist">{artistName}</h2>
-                <div className="right-panel">
-                    <div className="lyrics-container">
-                        LYRICS WILL GO HERE
-                    </div>
-                </div>
             </div>
         )
     }
@@ -48,7 +43,8 @@ class Player extends Component {
 
 
 const mapStateToProps = (state, ownProps) => ({
-    playbackData: state.playbackPayload
+    playbackData: state.playbackPayload,
+    view: state.activeView
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

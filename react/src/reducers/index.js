@@ -3,7 +3,8 @@ import {
     SET_REQUEST_URL,
     PARSE_RESPONSE_URL,
     STORE_AUTH_DATA,
-    GET_PLAYBACK_PAYLOAD
+    GET_PLAYBACK_PAYLOAD,
+    SET_VIEW
 } from '../actions/index'
 
 function requestUrl(state = '', action) {
@@ -42,11 +43,21 @@ var playbackPayload = (state = '', action) => {
     }
 }
 
+var activeView = (state = 0, action) => {
+    switch(action.type) {
+        case SET_VIEW:
+            return action.newView;
+        default:
+            return state;
+    }
+}
+
 const rootReducer = combineReducers({
     requestUrl,
     parsedUrlData,
     authenticationStatus,
-    playbackPayload
+    playbackPayload,
+    activeView
 })
 
 export default rootReducer

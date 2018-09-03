@@ -7,13 +7,12 @@ export const REQUEST_FAILED = 'REQUEST_FAILED';
 export const STORE_AUTH_DATA = 'STORE_AUTH_DATA';
 export const AUTHENTICATED = 'AUTHENTICATED';
 export const GET_PLAYBACK_PAYLOAD = 'GET_PLAYBACK_PAYLOAD';
-
+export const SET_VIEW = 'SET_VIEW';
 
 /**
  * Defines request parameters sent to the Spotify Authorization API by  setting the URL which is called once the authentication button is clicked
- * 
  */
-export function setRequestUrl() {
+export const setRequestUrl = () => {
     var loginConfig = {
         "baseUrl": "https://accounts.spotify.com/authorize",
         "urlParams": {
@@ -39,7 +38,7 @@ export function setRequestUrl() {
 /**
  * This action is used after the Spotify API redirects back to this application. It parses the return hash fragment and communicates all the parsed data to the backend
 */
-export function parseResponseUrl() {
+export const parseResponseUrl = () => {
     
     var url = window.location.href;
 
@@ -75,7 +74,7 @@ export function parseResponseUrl() {
  * Makes a POST request to the backend /api/auth/store to store the response parsed from the hash fragments and send it to the backend
  * @param {Object} authData
  */
-export function storeAuthData(authData) {
+export const storeAuthData = (authData) => {
     return (dispatch) => {
         axios.post("http://localhost:8000/api/auth/store", {authData: authData})
             .then(
@@ -119,4 +118,14 @@ export const getPaybackPayload = () => {
     }
 }
 
+/**
+ * 
+ * @param {number} view 
+ */
+export const setView = (view) => {
+    return {
+        type: SET_VIEW,
+        newView: view
+    }
+}
 
