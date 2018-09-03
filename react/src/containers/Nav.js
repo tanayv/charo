@@ -27,6 +27,13 @@ class Nav extends Component {
 
 }
 
+/**
+ * Adds a class to the element when the element's index matches the active index
+ * @param {string} baseValue The class that each element should have
+ * @param {string} concatValue The class that only the selected element should have
+ * @param {number} targetView The index of the selected value
+ * @param {number} activeView The index of the element passed to the function
+ */
 const ngClassesh = (baseValue, concatValue, targetView, activeView) => {
     if (activeView == targetView)
       return baseValue + " " + concatValue;

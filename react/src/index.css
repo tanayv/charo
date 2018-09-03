@@ -44,6 +44,7 @@ body, html, #root {
   width: 90%;
   margin: 0 auto;
   height: 90%;
+  overflow: auto;
 }
 
 button {
@@ -69,17 +70,11 @@ button:hover {
 }
 
 .lyrics-container {
-  width: calc(50% - 20px);
-  height: 100%;
-  background-color: #fff;
+  width: 100%;
   display: inline-block;
   vertical-align: top;
-  box-shadow: 3px 3px 7px -3px #94949493;
-  margin-left: 20px;
-}
-
-.lyrics-container:first-of-type {
-  margin-left: 0;
+  white-space: pre-wrap;
+  text-align: left;
 }
 
 .album-art {

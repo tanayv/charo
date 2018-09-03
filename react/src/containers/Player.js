@@ -5,6 +5,7 @@ import Nav from './Nav';
 import { 
     getPaybackPayload
 } from '../actions/index';
+import Lyrics from './Lyrics';
 
 class Player extends Component {
 
@@ -13,31 +14,48 @@ class Player extends Component {
         props.getPlaybackData();
     }
 
+    render() {
 
-  render() {
+        if (this.props.view === 0) {
+            if (this.props.playbackData.spotify) {
+                var songTitle = this.props.playbackData.spotify.item.name;
+                var albumArtUrl = this.props.playbackData.spotify.item.album.images[0].url;
+                var artistName = this.props.playbackData.spotify.item.album.artists[0].name;
+            
+                return(
+                    <div className="tile">
+                        <Nav/>
+                        <AlbumArt url={albumArtUrl}></AlbumArt>
+                        <h1 className="song-title">{songTitle}</h1> 
+                        <h2 className="song-artist">{artistName}</h2>
+                    </div>
+                )
+            }
+            else {
+                return (
+                    <div className="tile">
+                        Loading Song Data
+                    </div>
+                )
+            }
+        }
 
-    if (this.props.playbackData.spotify) {
-        var songTitle = this.props.playbackData.spotify.item.name;
-        var albumArtUrl = this.props.playbackData.spotify.item.album.images[0].url;
-        var artistName = this.props.playbackData.spotify.item.album.artists[0].name;
-    
-        return(
-            <div className="tile">
-                <Nav/>
-                <AlbumArt url={albumArtUrl}></AlbumArt>
-                <h1 className="song-title">{songTitle}</h1> 
-                <h2 className="song-artist">{artistName}</h2>
-            </div>
-        )
-    }
+        else if (this.props.view == 1) {
+            return(
+                <div className="tile">
+                    <Nav/>
+                    <Lyrics/>
+                </div>
+            )
+        }
 
-    else {
-        return (
-            <div className="tile">
-                Loading Song Data
-            </div>
-        )
-    }
+        else {
+            return(
+                <div className="tile">
+                    Ya I messed up somewhere thanks
+                </div>
+            )
+        }
   }
 }
 

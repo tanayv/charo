@@ -9,7 +9,8 @@ var router = express.Router();
 var axios = require("axios");
 var genius_api = require("genius-api");
 const Lyricist = require('lyricist/node6');
-var geniusAccessToken = "<GENIUS_API_ACCESS_TOKEN>";
+
+var geniusAccessToken = process.env.geniusAccessToken || require("./../secrets.json").geniusAccessToken;
 var lyricist = new Lyricist(geniusAccessToken);
 
 
@@ -36,10 +37,7 @@ router.get("/playback", (req, res) => {
             (response) => {
                 var songName = response.data.item.name;
                 var spotifyData = response.data;
-                res.json({
-                    "spotify": spotifyData,
-                });
-                /*
+                
                 genius.search(songName).then(function(response) {
 
                     songId = response.hits[0].result.id;
@@ -50,12 +48,12 @@ router.get("/playback", (req, res) => {
                             var abc = lyrics;
 
                             translator(abc, {to: 'en'}).then(glot => {
-                                console.log("glot", glot);
                                 res.json({
                                     "spotify": spotifyData,
                                     "genius": response,
                                     "geniusSongId": songId,
-                                    "lyrics": lyrics,
+                                    "lyricist": lyrics,
+                                    "lyrics": lyrics.lyrics,
                                     "translation": glot.text
                                 });
                             }).catch(err => {
@@ -67,7 +65,8 @@ router.get("/playback", (req, res) => {
                     )
 
                     
-                });*/
+                });
+            
                 
             },
             (error) => {
