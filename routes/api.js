@@ -6,74 +6,103 @@
 
 var express = require("express");
 var router = express.Router();
-var axios = require("axios");
-var genius_api = require("genius-api");
-const Lyricist = require('lyricist/node6');
-
-var geniusAccessToken = process.env.geniusAccessToken || require("./../secrets.json").geniusAccessToken;
-var lyricist = new Lyricist(geniusAccessToken);
-
-
 
 var spotify = require("./../controllers/spotify");
-//var genius = require("./../controllers/genius");
-
-var genius = new genius_api(geniusAccessToken);
-var translator = require("google-translate-api");
-
-
+var genius = require("./../controllers/genius");
+var translator = require("./../controllers/translate");
 
 var authData = {};
 
 router.get("/playback", (req, res) => {
-    var endpoint = 'https://api.spotify.com/v1/me/player';
-    var config = {
-        headers: {
-            'Authorization': 'Bearer ' + authData.access_token
-        }
-    }
-    axios.get(endpoint, config)
-        .then(
-            (response) => {
-                var songName = response.data.item.name;
-                var spotifyData = response.data;
-                
-                genius.search(songName).then(function(response) {
 
-                    songId = response.hits[0].result.id;
-                    lyricist.song(songId, { fetchLyrics: true }).then(
-                        (lyrics) => {
+    /* Level 1: Get playback data from the Spotify API */
+    spotify.fetchPlayback(authData.access_token, (spotifyData) => {
 
-
-                            var abc = lyrics;
-
-                            translator(abc, {to: 'en'}).then(glot => {
-                                res.json({
-                                    "spotify": spotifyData,
-                                    "genius": response,
-                                    "geniusSongId": songId,
-                                    "lyricist": lyrics,
-                                    "lyrics": lyrics.lyrics,
-                                    "translation": glot.text
-                                });
-                            }).catch(err => {
-                                console.error(err);
-                            });
-
-
-                        }
-                    )
-
-                    
-                });
+        if (spotifyData) {
             
-                
-            },
-            (error) => {
-                console.log(error);
-                res.json(error);
-            }
-        )
+            var songName = spotifyData.item.name;
+            var artistName = spotifyData.item.artists[0].name;
+            var songQuery = songName;
+
+            /* Level 2: Find the song's ID using the Genius API Search */
+            genius.findSongId(songQuery, (geniusData) => {
+                if (geniusData && geniusData.hits.length > 0) {
+                    var songId = geniusData.hits[0].result.id;
+
+                    /* @todo: Verify if song name, artist name corresponds with hit to prevent wrong lyrics being displayed. */
+
+                    /* Level 3: Fetch the song lyrics using the song ID */
+                    genius.getSongLyrics(songId, (lyricistData) => {
+                        if (lyricistData) {
+                            var lyrics = lyricistData.lyrics;
+
+                            /* Level 4: Translate song lyrics line-by-line */
+                            translator.translateSongLyrics(lyrics, (translation) => {
+
+                                /* Complete full task at Level 4 */
+                                if (translation) {
+                                    res.json({
+                                        "spotify": spotifyData,
+                                        "genius": geniusData,
+                                        "lyricist": lyricistData,
+                                        "lyrics": lyrics,
+                                        "translation": translation
+                                    });
+
+                                }
+
+                                /* Abandon at Level 4 */
+                                else {
+                                    res.json({
+                                        "spotify": spotifyData,
+                                        "genius": geniusData,
+                                        "lyricist": lyricistData,
+                                        "lyrics": lyrics,
+                                        "translation": []
+                                    });
+                                }
+                            })
+                        }
+                        else {
+                            /* Abandon at Level 3 */
+                            res.json({
+                                "spotify": spotifyData,
+                                "genius": geniusData,
+                                "lyricist": {},
+                                "lyrics": {},
+                                "translation": []
+                            });
+                        }
+                    })
+                }
+                else {
+                    /* Abandon at Level 2 */
+                    res.json({
+                        "spotify": spotifyData,
+                        "genius": {},
+                        "lyricist": {},
+                        "lyrics": {},
+                        "translation": []
+                    });
+                }
+            })
+
+        }
+
+        else {
+
+            /* Abandon at Level 1 */
+            res.json({
+                "spotify": {},
+                "genius": {},
+                "lyricist": {},
+                "lyrics": {},
+                "translation": []
+            });
+
+        }
+    })
+
 });
 
 

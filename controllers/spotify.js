@@ -1,33 +1,27 @@
-var spotifyAPI = require("spotify-web-api-node");
+const axios = require("axios");
 
-/* Environment Variables */
-const CLIENT_ID = process.env.clientId || require("./../env.json").clientId;
-const CLIENT_SECRET = process.env.clientSecret || require("./../env.json").clientSecret
+const fetchPlayback = (accessToken, callback) => {
+    const endpoint = 'https://api.spotify.com/v1/me/player';
+    const config = {
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        }
+    };
 
-var spotify = new spotifyAPI({
-    clientId: CLIENT_ID,
-    clientSecret: CLIENT_SECRET,
-    redirectUri: 'https://charognard.herokuapp.com/callback'
-})
+    axios.get(endpoint, config)
+        .then(
+            (response) => {
+                var spotifyData = response.data;
+                callback(spotifyData);
+            },
+            (error) => {
+                console.log("Error with Spotify API Playback Retrieval", error);
+                callback({});
+            }
+        )
 
-var token = "";
-var expires = 0;
-
-var getPlayback = (accessToken, callback) => {
-    spotify.getMyCurrentPlaybackState({accessToken})
-    .then(function(data) {
-        callback(data.body)
-    }, function(err) {
-        callback({})
-        console.log("There was an error " + err);
-    });
-}
-
-var parseCallback = (req) => {
-    console.log(req.query);
 }
 
 module.exports = {
-    getPlayback,
-    parseCallback
+    fetchPlayback
 }
