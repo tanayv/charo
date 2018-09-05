@@ -6,6 +6,7 @@ import {
     getPaybackPayload
 } from '../actions/index';
 import Lyrics from './Lyrics';
+import Translation from './Translation';
 
 class Player extends Component {
 
@@ -25,9 +26,11 @@ class Player extends Component {
                 return(
                     <div className="tile">
                         <Nav/>
-                        <AlbumArt url={albumArtUrl}></AlbumArt>
-                        <h1 className="song-title">{songTitle}</h1> 
-                        <h2 className="song-artist">{artistName}</h2>
+                        <div class="player-container">
+                            <AlbumArt url={albumArtUrl}></AlbumArt>
+                            <h1 className="song-title">{songTitle}</h1> 
+                            <h2 className="song-artist">{artistName}</h2>
+                        </div>
                     </div>
                 )
             }
@@ -40,11 +43,20 @@ class Player extends Component {
             }
         }
 
-        else if (this.props.view == 1) {
+        else if (this.props.view === 1) {
             return(
                 <div className="tile">
                     <Nav/>
                     <Lyrics/>
+                </div>
+            )
+        }
+
+        else if (this.props.view === 2) {
+            return(
+                <div className="tile">
+                    <Nav/>
+                    <Translation/>
                 </div>
             )
         }

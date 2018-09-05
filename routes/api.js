@@ -11,6 +11,8 @@ var spotify = require("./../controllers/spotify");
 var genius = require("./../controllers/genius");
 var translator = require("./../controllers/translate");
 
+var axios = require("axios");
+
 var authData = {};
 
 router.get("/playback", (req, res) => {
@@ -31,48 +33,36 @@ router.get("/playback", (req, res) => {
 
                     /* @todo: Verify if song name, artist name corresponds with hit to prevent wrong lyrics being displayed. */
 
-                    /* Level 3: Fetch the song lyrics using the song ID */
-                    genius.getSongLyrics(songId, (lyricistData) => {
-                        if (lyricistData) {
-                            var lyrics = lyricistData.lyrics;
+                    genius.embedSongLyrics(songId, (songLyrics) => {
+                        if (songLyrics) {
+                            
 
-                            /* Level 4: Translate song lyrics line-by-line */
-                            translator.translateSongLyrics(lyrics, (translation) => {
-
-                                /* Complete full task at Level 4 */
-                                if (translation) {
+                            translator.translateSongLyrics(songLyrics, (translatedLyrics) => {
+                                if (translatedLyrics)
                                     res.json({
                                         "spotify": spotifyData,
                                         "genius": geniusData,
-                                        "lyricist": lyricistData,
-                                        "lyrics": lyrics,
-                                        "translation": translation
+                                        "lyrics": songLyrics,
+                                        "translation": translatedLyrics
                                     });
-
-                                }
-
-                                /* Abandon at Level 4 */
                                 else {
                                     res.json({
                                         "spotify": spotifyData,
                                         "genius": geniusData,
-                                        "lyricist": lyricistData,
-                                        "lyrics": lyrics,
+                                        "lyrics": songLyrics,
                                         "translation": []
                                     });
                                 }
                             })
+
                         }
-                        else {
-                            /* Abandon at Level 3 */
+                        else
                             res.json({
                                 "spotify": spotifyData,
                                 "genius": geniusData,
-                                "lyricist": {},
-                                "lyrics": {},
+                                "lyrics": "",
                                 "translation": []
-                            });
-                        }
+                            })
                     })
                 }
                 else {
@@ -80,8 +70,7 @@ router.get("/playback", (req, res) => {
                     res.json({
                         "spotify": spotifyData,
                         "genius": {},
-                        "lyricist": {},
-                        "lyrics": {},
+                        "lyrics": "",
                         "translation": []
                     });
                 }
@@ -95,8 +84,7 @@ router.get("/playback", (req, res) => {
             res.json({
                 "spotify": {},
                 "genius": {},
-                "lyricist": {},
-                "lyrics": {},
+                "lyrics": "",
                 "translation": []
             });
 
@@ -122,8 +110,6 @@ router.post("/auth/store", (req, res) => {
         });
     }
 })
-
-
 
 
 module.exports = router;

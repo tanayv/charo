@@ -35,7 +35,6 @@ body, html, #root {
 
 .app-container .tile {
   background-color: #fff;
-  padding: 30px;
   border-radius: 5px;
   box-shadow: 3px 3px 7px -3px #949494;
   text-align: center;
@@ -77,6 +76,18 @@ button:hover {
   text-align: left;
 }
 
+iframe.lyricist {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.lyricist .embed-layer {
+  text-align: left;
+  padding: 30px;
+}
+
+
+
 .album-art {
   width: 200px;
   height: 200px;
@@ -104,8 +115,8 @@ h2.song-artist {
 }
 
 .nav {
-  width: calc(100% + 60px);
-  margin: -30px -30px 30px -30px;
+  width: calc(100%);
+  margin-bottom: 20px;
   border-bottom: 1px solid #c2c2c2;
   color: #2F2933;
 }
@@ -120,4 +131,8 @@ h2.song-artist {
 
 .nav .option.selected {
   border-bottom: 2px solid #110f3e;
+}
+
+.playback-container {
+  padding: 30px;
 }

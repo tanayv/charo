@@ -4,24 +4,22 @@ import {
     getPaybackPayload
 } from '../actions/index';
 
-
-class Lyrics extends Component {
+class Translation extends Component {
 
     render() {
 
+        
         return(
-
-            <div className="lyricist">
-                <div className="embed-layer"
-                dangerouslySetInnerHTML={{__html: this.props.lyrics}}>
-                </div>
+            <div className="translation">
+                {this.props.translation}
             </div>
         )
     }
+
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    lyrics: state.playbackPayload.lyrics
+    translation: state.playbackPayload.translation
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -33,4 +31,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Lyrics)
+)(Translation)
