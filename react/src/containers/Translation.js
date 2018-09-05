@@ -8,10 +8,17 @@ class Translation extends Component {
 
     render() {
 
+        var data = this.props.translation.map((item) => {
+            return (<div class="lyric">
+                {item.original}<br/>
+                <b>{item.translation}</b>
+            </div>)
+        });
         
         return(
+            
             <div className="translation">
-                {this.props.translation}
+                {data}
             </div>
         )
     }
