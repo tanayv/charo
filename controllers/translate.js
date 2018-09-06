@@ -15,6 +15,7 @@ const translateSongLyrics = (songLyrics, callback) => {
     var songLines = reqText.split("<br>");
     var promiseChain = [];
 
+    /*
     for (var line of songLines) {
         
         if (line != '') {
@@ -31,7 +32,7 @@ const translateSongLyrics = (songLyrics, callback) => {
         }
     }
 
-     
+    
     var combinedChain = [];
     Promise.all(promiseChain)
         .then((response) => {
@@ -58,10 +59,10 @@ const translateSongLyrics = (songLyrics, callback) => {
         (error) => {
             console.log("There was an error in translation", error);
             callback([]);
-        })
+        })*/
     
 
-    /* To preserve API Calls
+    
     var songLineChain = [];
     for (var line of songLines) {
         songLineChain.push({
@@ -69,26 +70,48 @@ const translateSongLyrics = (songLyrics, callback) => {
             translation: "t" + removeHTMLTags(line)
         })
     }
-
+    console.log(songLyrics);
     callback(songLineChain);
-    */
+    
 
 
     
 
 }
 
+/**
+ * Performs elementary optimizations to prepare payload for translation by 
+ * extracting parts inside a <p> tag. 
+ * @param {string} domContent: HTML DOM body for genius embed
+ */
 const optimizeDomForTranslation = (domContent) => {
-    var clipStart = domContent.indexOf("<p>") + 3;
-    var clipEnd = domContent.indexOf("</p>");
-    var clippedData = "";
-    for (var i = clipStart; i < clipEnd; i++) {
-        clippedData += domContent[i];
-    };
 
-    return clippedData;
+    var extractedData = "";
+
+    while (domContent.indexOf("<p>") != -1) {
+
+        var clipStart = domContent.indexOf("<p>") + 3;
+        var clipEnd = domContent.indexOf("</p>");
+        var clippedData = "";
+        for (var i = clipStart; i < clipEnd; i++) {
+            clippedData += domContent[i];
+        };
+        
+        /* Remove clipped content from domContent */
+        domContent = domContent.substr(clipEnd, domContent.length);
+
+        extractedData += clippedData;
+        
+    }
+
+    return extractedData;
+
 }
 
+/**
+ * Extracts innertext from <div> tag strings
+ * @param {string} line A <div> tag including inner HTML
+ */
 const removeHTMLTags = (line) => {
     
     var tagFlag = false;

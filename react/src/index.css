@@ -86,10 +86,13 @@ iframe.lyricist {
   padding: 30px;
 }
 
+.translation {
+  padding: 30px;
+  text-align: left;
+}
+
 .translation .lyric {
   margin-bottom: 10px;
-  text-align: left;
-  padding: 30px;
 }
 
 .album-art {
