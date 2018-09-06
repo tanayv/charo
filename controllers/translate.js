@@ -5,19 +5,16 @@ var querystring = require("querystring");
 const translateSongLyrics = (songLyrics, callback) => {
     
     var reqText = optimizeDomForTranslation(songLyrics);
-    
     var config = {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
     };
-
     var endpoint = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + yandexApiKey;
-
+    
     var songLines = reqText.split("<br>");
-
     var promiseChain = [];
-     
+
     for (var line of songLines) {
         
         if (line != '') {
@@ -38,12 +35,24 @@ const translateSongLyrics = (songLyrics, callback) => {
     var combinedChain = [];
     Promise.all(promiseChain)
         .then((response) => {
-            for (var i = 0; i < response.length; i++) {
-                combinedChain.push({
-                    original: removeHTMLTags(songLines[i]),
-                    translation: response[i].data.text[0]
-                });
+
+            var translationIndex = 0;
+            for (var i = 0; i < songLines.length; i++) {
+                if (line != '') {
+                    combinedChain[i].push({
+                        original: removeHTMLTags(songLines[i]),
+                        translation: response[translationIndex].data.text[0]
+                    });
+                    translationIndex++;
+                }
+                else {
+                    combinedChain[i].push({
+                        original: '',
+                        translation: ''
+                    });
+                }
             }
+
             callback(combinedChain);
         },
         (error) => {

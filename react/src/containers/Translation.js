@@ -25,11 +25,11 @@ class Translation extends Component {
 
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
     translation: state.playbackPayload.translation
 })
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch) => ({
     getPlaybackData: () => {
         dispatch(getPaybackPayload());
     },
