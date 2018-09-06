@@ -36,8 +36,12 @@ class Player extends Component {
             }
             else {
                 return (
-                    <div className="tile">
-                        Loading Song Data
+                    <div className="tile loading">
+                        <div class="loading-container">
+                            <div className="matuidi-charo">
+                            </div>
+                            <p>Loading playback data</p>
+                        </div>
                     </div>
                 )
             }

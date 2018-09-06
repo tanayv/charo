@@ -15,7 +15,7 @@ const translateSongLyrics = (songLyrics, callback) => {
     var songLines = reqText.split("<br>");
     var promiseChain = [];
 
-    /*
+    
     for (var line of songLines) {
         
         if (line != '') {
@@ -37,17 +37,19 @@ const translateSongLyrics = (songLyrics, callback) => {
     Promise.all(promiseChain)
         .then((response) => {
 
+            
             var translationIndex = 0;
             for (var i = 0; i < songLines.length; i++) {
-                if (line != '') {
-                    combinedChain[i].push({
+                if (songLines[i] != '') {
+                    console.log(response[translationIndex]);
+                    combinedChain.push({
                         original: removeHTMLTags(songLines[i]),
                         translation: response[translationIndex].data.text[0]
                     });
                     translationIndex++;
                 }
                 else {
-                    combinedChain[i].push({
+                    combinedChain.push({
                         original: '',
                         translation: ''
                     });
@@ -59,19 +61,28 @@ const translateSongLyrics = (songLyrics, callback) => {
         (error) => {
             console.log("There was an error in translation", error);
             callback([]);
-        })*/
+        })
     
 
     
-    var songLineChain = [];
+    /*var songLineChain = [];
     for (var line of songLines) {
-        songLineChain.push({
-            original: removeHTMLTags(line),
-            translation: "t" + removeHTMLTags(line)
-        })
+
+        if (removeHTMLTags(line) == "") {
+            songLineChain.push({
+                original: "",
+                translation: ""
+            })
+        }
+
+        else {
+            songLineChain.push({
+                original: removeHTMLTags(line),
+                translation: "t" + removeHTMLTags(line)
+            })
+        }
     }
-    console.log(songLyrics);
-    callback(songLineChain);
+    callback(songLineChain);*/
     
 
 

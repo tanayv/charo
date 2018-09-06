@@ -46,6 +46,27 @@ body, html, #root {
   overflow: auto;
 }
 
+.app-container .tile.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.app-container .tile.loading .loading-container {
+  font-size: 1.4rem;
+}
+.matuidi-charo {
+  height: 200px;
+  width: 200px;
+  background-image: url('https://media3.giphy.com/media/3oD3YFjkwL38aAlfwI/giphy.gif');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  display: block;
+}
+
 button {
   text-transform: uppercase;
   width: 200px;
@@ -93,6 +114,12 @@ iframe.lyricist {
 
 .translation .lyric {
   margin-bottom: 10px;
+  color: #a5a5a5
+}
+
+.translation .lyric b {
+  color: #2F2933;
+  font-weight: 400;
 }
 
 .album-art {

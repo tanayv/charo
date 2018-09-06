@@ -35,7 +35,7 @@ class Nav extends Component {
  * @param {number} activeView The index of the element passed to the function
  */
 const ngClassesh = (baseValue, concatValue, targetView, activeView) => {
-    if (activeView == targetView)
+    if (activeView === targetView)
       return baseValue + " " + concatValue;
     else 
       return baseValue
