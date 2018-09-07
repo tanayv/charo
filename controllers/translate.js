@@ -1,3 +1,10 @@
+/**
+ * File: translate.js
+ * Exports: Functions
+ * Description: Contains functions that interact with the Yandex API and perform DOM optimization
+*/
+
+
 const axios = require("axios");
 const yandexApiKey = require("./../secrets.json").yandex;
 var querystring = require("querystring");
@@ -62,31 +69,6 @@ const translateSongLyrics = (songLyrics, callback) => {
             console.log("There was an error in translation", error);
             callback([]);
         })
-    
-
-    
-    /*var songLineChain = [];
-    for (var line of songLines) {
-
-        if (removeHTMLTags(line) == "") {
-            songLineChain.push({
-                original: "",
-                translation: ""
-            })
-        }
-
-        else {
-            songLineChain.push({
-                original: removeHTMLTags(line),
-                translation: "t" + removeHTMLTags(line)
-            })
-        }
-    }
-    callback(songLineChain);*/
-    
-
-
-    
 
 }
 
@@ -140,27 +122,61 @@ const removeHTMLTags = (line) => {
 
 
 /*
-    Working single request before promise chain
-    var requestBody = {
-        text: removeHTMLTags(songLines[2]),
-        lang: 'fr-en'
-    };
 
-    
-    axios.post(endpoint, querystring.stringify(requestBody))
-        .then((response) => {
-            console.log(response.data);
-            callback([
-                {
-                    original: songLines[2],
-                    translation: response.data.text
-                }
-            ]);
-        }, 
-        (error) => {
-            console.log(error);
-            callback([]);
-        });
+    Archived Legacy Code for reference
+
+
+    1. Working single request before promise chain
+        
+    <code>
+        var requestBody = {
+            text: removeHTMLTags(songLines[2]),
+            lang: 'fr-en'
+        };
+
+        
+        axios.post(endpoint, querystring.stringify(requestBody))
+            .then((response) => {
+                console.log(response.data);
+                callback([
+                    {
+                        original: songLines[2],
+                        translation: response.data.text
+                    }
+                ]);
+            }, 
+            (error) => {
+                console.log(error);
+                callback([]);
+            });
+    </code>
+
+            --------------------------------
+
+    2. Fake translation that prefixes original with T to conserve API quota for testing purposes
+
+    <code>
+        /*var songLineChain = [];
+        for (var line of songLines) {
+
+            if (removeHTMLTags(line) == "") {
+                songLineChain.push({
+                    original: "",
+                    translation: ""
+                })
+            }
+
+            else {
+                songLineChain.push({
+                    original: removeHTMLTags(line),
+                    translation: "t" + removeHTMLTags(line)
+                })
+            }
+        }
+        callback(songLineChain);
+    </code>
+
+
     */
 
 module.exports = {

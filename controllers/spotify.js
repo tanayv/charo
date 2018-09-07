@@ -1,3 +1,10 @@
+/**
+ * File: spotify.js
+ * Exports: Functions
+ * Description: Contains functions that interact with the Spotify API
+*/
+
+
 const axios = require("axios");
 
 /**

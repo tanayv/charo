@@ -1,3 +1,10 @@
+/**
+ * File: genius.js
+ * Exports: Functions
+ * Description: Contains functions that interact with the Genius API and work on dynamically * embedding Genius content
+*/
+
+
 const geniusModule = require("genius-api");
 const axios = require("axios");
 var geniusAccessToken = process.env.geniusAccessToken || require("./../secrets.json").geniusAccessToken;
