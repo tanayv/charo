@@ -11,10 +11,13 @@ var spotify = require("./../controllers/spotify");
 var genius = require("./../controllers/genius");
 var translator = require("./../controllers/translate");
 
-var axios = require("axios");
-
+/** Temporary session-based storage for authentication data received from the Spotify API */
 var authData = {};
 
+
+/** 
+ * Main endpoint that returns information on playback, lyrics and translation
+ */
 router.get("/playback", (req, res) => {
 
     /* Level 1: Get playback data from the Spotify API */
@@ -93,7 +96,10 @@ router.get("/playback", (req, res) => {
 
 });
 
-
+/**
+ * This endpoint is used to store data obtained from parsing the hash fragment
+ * obtained from the Spotify API authentication response
+ */
 router.post("/auth/store", (req, res) => {
     
     if (req.body.authData) {

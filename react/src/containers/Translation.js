@@ -15,12 +15,22 @@ class Translation extends Component {
             </div>)
         });
         
-        return(
-            
-            <div className="translation">
-                {data}
-            </div>
-        )
+        if (data.length > 0)
+            return(
+                <div className="translation">
+                    {data}
+                </div>
+            )
+        else 
+            return(
+                <div className="translation">
+                    <div class="loading-container">
+                        <div className="matuidi-charo">
+                        </div>
+                        <p>Could not translate lyrics</p>
+                    </div>
+                </div>
+            )
     }
 
 }
