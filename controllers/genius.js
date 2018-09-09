@@ -4,7 +4,6 @@
  * Description: Contains functions that interact with the Genius API and work on dynamically * embedding Genius content
 */
 
-
 const geniusModule = require("genius-api");
 const axios = require("axios");
 var geniusAccessToken = process.env.geniusAccessToken || require("./../secrets.json").geniusAccessToken;
@@ -77,15 +76,29 @@ const embedSongLyrics = (songId, callback) => {
 /**
  * Verifies whether the lyrics being sent belong to the correct song and artist
  * received from Spotify playback
- * @param {Array} ageniusData Array of Genius "Hits"
+ * @param {array} ageniusData Array of Genius "Hits"
  * @param {string} songName Name of song (from Spotify playback)
  * @param {string} artistName Name of song artist (from Spotify playback)
  */
 const verify = (geniusData, songName, artistName) => {
+    var resIndex = -1;
+    
+    geniusData.hits.forEach((hit, index) => {
+        var hitName = hit.result.title;
+        var hitArtist = hit.result.primary_artist.name;
 
+        if (songName.toLowerCase() === hitName.toLowerCase()) {
+            if (hitArtist.toLowerCase() === artistName.toLowerCase()) {
+                resIndex = index;
+            }
+        }
+    })
+
+    return resIndex;
 }
 
 module.exports = {
-    findSongId,
-    embedSongLyrics
+    findSong,
+    embedSongLyrics,
+    verify
 }

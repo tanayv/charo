@@ -32,43 +32,57 @@ router.get("/playback", (req, res) => {
             /* Level 2: Find the song data on Genius using the Genius API Search */
             genius.findSong(songQuery, (geniusData) => {
                 if (geniusData && geniusData.hits.length > 0) {
-                    var songId = geniusData.hits[0].result.id;
+                    
+                    var hitIndex = genius.verify(geniusData, songName, artistName); 
+                    if (hitIndex != -1) {
+                        var songId = geniusData.hits[hitIndex].result.id;
 
-                    /* @todo: Verify if song name, artist name corresponds with hit to prevent wrong lyrics being displayed. */
-                    var verificationScore = genius.verify(geniusData, songName, artistName); 
-
-
-                    genius.embedSongLyrics(songId, (songLyrics) => {
-                        if (songLyrics) {
+                        genius.embedSongLyrics(songId, (songLyrics) => {
+                            if (songLyrics) {
+                                
+                                translator.translateSongLyricsFake(songLyrics, (translatedLyrics) => {
+                                    if (translatedLyrics)
+                                        res.json({
+                                            "spotify": spotifyData,
+                                            "genius": geniusData,
+                                            "lyrics": songLyrics,
+                                            "translation": translatedLyrics
+                                        });
+                                    else {
+                                        res.json({
+                                            "spotify": spotifyData,
+                                            "genius": geniusData,
+                                            "lyrics": songLyrics,
+                                            "translation": []
+                                        });
+                                    }
+                                })
+    
+                            }
                             
+                            else
+                                /* Abandon at Level 2.5: Song (and) its lyrics not found */
+                                res.json({
+                                    "spotify": spotifyData,
+                                    "genius": geniusData,
+                                    "lyrics": "",
+                                    "translation": []
+                                })
+                        })
+                    }
 
-                            translator.translateSongLyricsFake(songLyrics, (translatedLyrics) => {
-                                if (translatedLyrics)
-                                    res.json({
-                                        "spotify": spotifyData,
-                                        "genius": geniusData,
-                                        "lyrics": songLyrics,
-                                        "translation": translatedLyrics
-                                    });
-                                else {
-                                    res.json({
-                                        "spotify": spotifyData,
-                                        "genius": geniusData,
-                                        "lyrics": songLyrics,
-                                        "translation": []
-                                    });
-                                }
-                            })
+                    else {
+                        /* Abandon at Level 2 */
+                        res.json({
+                            "spotify": spotifyData,
+                            "genius": {},
+                            "lyrics": "",
+                            "translation": []
+                        });
 
-                        }
-                        else
-                            res.json({
-                                "spotify": spotifyData,
-                                "genius": geniusData,
-                                "lyrics": "",
-                                "translation": []
-                            })
-                    })
+                    }
+
+                    
                 }
                 else {
                     /* Abandon at Level 2 */
