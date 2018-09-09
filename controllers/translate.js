@@ -121,12 +121,38 @@ const removeHTMLTags = (line) => {
 }
 
 
+const translateSongLyricsFake = (songLyrics, callback) => {
+
+    var reqText = optimizeDomForTranslation(songLyrics);
+    var songLines = reqText.split("<br>");
+
+
+    var songLineChain = [];
+        for (var line of songLines) {
+
+            if (removeHTMLTags(line) == "") {
+                songLineChain.push({
+                    original: "",
+                    translation: ""
+                })
+            }
+
+            else {
+                songLineChain.push({
+                    original: removeHTMLTags(line),
+                    translation: "t" + removeHTMLTags(line)
+                })
+            }
+        }
+        callback(songLineChain);
+}
+
 /*
 
     Archived Legacy Code for reference
 
 
-    1. Working single request before promise chain
+    Working single request before promise chain
         
     <code>
         var requestBody = {
@@ -151,34 +177,9 @@ const removeHTMLTags = (line) => {
             });
     </code>
 
-            --------------------------------
-
-    2. Fake translation that prefixes original with T to conserve API quota for testing purposes
-
-    <code>
-        /*var songLineChain = [];
-        for (var line of songLines) {
-
-            if (removeHTMLTags(line) == "") {
-                songLineChain.push({
-                    original: "",
-                    translation: ""
-                })
-            }
-
-            else {
-                songLineChain.push({
-                    original: removeHTMLTags(line),
-                    translation: "t" + removeHTMLTags(line)
-                })
-            }
-        }
-        callback(songLineChain);
-    </code>
-
-
-    */
+*/
 
 module.exports = {
-    translateSongLyrics
+    translateSongLyrics,
+    translateSongLyricsFake
 }

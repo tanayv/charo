@@ -10,8 +10,12 @@ const axios = require("axios");
 var geniusAccessToken = process.env.geniusAccessToken || require("./../secrets.json").geniusAccessToken;
 var genius = new geniusModule(geniusAccessToken);
 
-
-const findSongId = (songName, callback) => {
+/**
+ * Fetches the song's information on Genius using the Genius API search endpoint
+ * @param {string} songName Name of the song (received from Spotify playback)
+ * @param {funciton} callback Callback function that sends response from Genius API
+ */
+const findSong = (songName, callback) => {
     genius.search(songName)
         .then(
             (response) => {
@@ -24,6 +28,11 @@ const findSongId = (songName, callback) => {
         )
 }
 
+/**
+ * Fetches information needed to dynamically embed Genius song lyrics in React
+ * @param {string} songId Genius API ID for the song
+ * @param {function} callback Callback returning embedding data
+ */
 const embedSongLyrics = (songId, callback) => {
     axios.get("https://genius.com/songs/" + songId + "/embed.js")
         .then((response) => {
@@ -63,6 +72,17 @@ const embedSongLyrics = (songId, callback) => {
             console.log(err);
             callback([]);
         })
+}
+
+/**
+ * Verifies whether the lyrics being sent belong to the correct song and artist
+ * received from Spotify playback
+ * @param {Array} ageniusData Array of Genius "Hits"
+ * @param {string} songName Name of song (from Spotify playback)
+ * @param {string} artistName Name of song artist (from Spotify playback)
+ */
+const verify = (geniusData, songName, artistName) => {
+
 }
 
 module.exports = {

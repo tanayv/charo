@@ -29,18 +29,20 @@ router.get("/playback", (req, res) => {
             var artistName = spotifyData.item.artists[0].name;
             var songQuery = songName;
 
-            /* Level 2: Find the song's ID using the Genius API Search */
-            genius.findSongId(songQuery, (geniusData) => {
+            /* Level 2: Find the song data on Genius using the Genius API Search */
+            genius.findSong(songQuery, (geniusData) => {
                 if (geniusData && geniusData.hits.length > 0) {
                     var songId = geniusData.hits[0].result.id;
 
                     /* @todo: Verify if song name, artist name corresponds with hit to prevent wrong lyrics being displayed. */
+                    var verificationScore = genius.verify(geniusData, songName, artistName); 
+
 
                     genius.embedSongLyrics(songId, (songLyrics) => {
                         if (songLyrics) {
                             
 
-                            translator.translateSongLyrics(songLyrics, (translatedLyrics) => {
+                            translator.translateSongLyricsFake(songLyrics, (translatedLyrics) => {
                                 if (translatedLyrics)
                                     res.json({
                                         "spotify": spotifyData,
