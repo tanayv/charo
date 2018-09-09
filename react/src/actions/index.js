@@ -9,6 +9,8 @@ export const AUTHENTICATED = 'AUTHENTICATED';
 export const GET_PLAYBACK_PAYLOAD = 'GET_PLAYBACK_PAYLOAD';
 export const SET_VIEW = 'SET_VIEW';
 
+const url = "http://localhost:8000";
+
 /**
  * Defines request parameters sent to the Spotify Authorization API by  setting the URL which is called once the authentication button is clicked
  */
@@ -17,7 +19,7 @@ export const setRequestUrl = () => {
         "baseUrl": "https://accounts.spotify.com/authorize",
         "urlParams": {
             "client_id": "804e43256299432b8e9401998ec9e22b",
-            "redirect_uri": "http://localhost:8000/auth/callback/",
+            "redirect_uri": url + "/auth/callback/",
             "scope": "user-read-currently-playing user-read-playback-state",
             "response_type": "token",
             "state": "6716F7FB8B9185A504B97FFAB87720B90D5E0CFCA48978A3827126F382D2093D"
@@ -63,7 +65,6 @@ export const parseResponseUrl = () => {
         data[n].push(nv.length === 2 ? v : null);
     }
     
-    /** Some way to leave the application or make a POST request to the API */
     
     return (dispatch) => {
         dispatch(storeAuthData(data));
@@ -76,7 +77,7 @@ export const parseResponseUrl = () => {
  */
 export const storeAuthData = (authData) => {
     return (dispatch) => {
-        axios.post("http://localhost:8000/api/auth/store", {authData: authData})
+        axios.post(url + "/api/auth/store", {authData: authData})
             .then(
                 (response) => {
                     dispatch({
@@ -100,7 +101,7 @@ export const storeAuthData = (authData) => {
 export const getPaybackPayload = () => {
     console.log("Fetching playback data from backend");
     return (dispatch) => {
-        axios.get("http://localhost:8000/api/playback")
+        axios.get(url + "/api/playback")
             .then(
                 (response) => {
                     dispatch({
