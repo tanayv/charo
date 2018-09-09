@@ -14,7 +14,6 @@ var translator = require("./../controllers/translate");
 /** Temporary session-based storage for authentication data received from the Spotify API */
 var authData = {};
 
-
 /** 
  * Main endpoint that returns information on playback, lyrics and translation
  */
@@ -59,7 +58,7 @@ router.get("/playback", (req, res) => {
                                 })
     
                             }
-                            
+
                             else
                                 /* Abandon at Level 2.5: Song (and) its lyrics not found */
                                 res.json({

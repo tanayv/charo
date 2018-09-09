@@ -6,7 +6,7 @@
 
 
 const axios = require("axios");
-const yandexApiKey = require("./../secrets.json").yandex;
+const yandexApiKey = process.env.YANDEX_API_KEY || require("./../secrets.json").yandex;
 var querystring = require("querystring");
 
 const translateSongLyrics = (songLyrics, callback) => {
