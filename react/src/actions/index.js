@@ -9,7 +9,7 @@ export const AUTHENTICATED = 'AUTHENTICATED';
 export const GET_PLAYBACK_PAYLOAD = 'GET_PLAYBACK_PAYLOAD';
 export const SET_VIEW = 'SET_VIEW';
 
-const url = "https://charognard.herokuapp.com/";
+const url = "https://charognard.herokuapp.com";
 
 /**
  * Defines request parameters sent to the Spotify Authorization API by  setting the URL which is called once the authentication button is clicked

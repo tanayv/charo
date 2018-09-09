@@ -11,7 +11,7 @@
     "test": "cd react && npm start",
     "build": "cd react && npm run build",
     "kickstart": "cd react && npm run build && cd .. && node index.js",
-    "heroku-postbuild": "cd react && npm run build"
+    "heroku-postbuild": "cd react && npm install && npm run build"
   },
   "repository": {
     "type": "git",
