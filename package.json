@@ -10,7 +10,8 @@
     "start": "node index.js",
     "test": "cd react && npm start",
     "build": "cd react && npm run build",
-    "kickstart": "cd react && npm run build && cd .. && node index.js"
+    "kickstart": "cd react && npm run build && cd .. && node index.js",
+    "heroku-postbuild": "cd react && npm run build"
   },
   "repository": {
     "type": "git",
