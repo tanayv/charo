@@ -14,9 +14,9 @@ class Nav extends Component {
   render() {
     return (
       <div className="nav">
-          <div onClick={() => this.setNavView(0)} className={ngClassesh("option", "selected", this.props.activeView, 0)}>Playback</div>
-          <div onClick={() => this.setNavView(1)} className={ngClassesh("option", "selected", this.props.activeView, 1)}>Lyrics</div>
-          <div onClick={() => this.setNavView(2)} className={ngClassesh("option", "selected", this.props.activeView, 2)}>Translation</div>
+          <div onClick={() => this.setNavView(0)} className={ngClass("option", "selected", this.props.activeView, 0)}>Playback</div>
+          <div onClick={() => this.setNavView(1)} className={ngClass("option", "selected", this.props.activeView, 1)}>Lyrics</div>
+          <div onClick={() => this.setNavView(2)} className={ngClass("option", "selected", this.props.activeView, 2)}>Translation</div>
       </div>
     )
   }
@@ -34,7 +34,7 @@ class Nav extends Component {
  * @param {number} targetView The index of the selected value
  * @param {number} activeView The index of the element passed to the function
  */
-const ngClassesh = (baseValue, concatValue, targetView, activeView) => {
+const ngClass = (baseValue, concatValue, targetView, activeView) => {
     if (activeView === targetView)
       return baseValue + " " + concatValue;
     else 

@@ -4,7 +4,6 @@
  * Description: Contains functions that interact with the Yandex API and perform DOM optimization
 */
 
-
 const axios = require("axios");
 const yandexApiKey = process.env.YANDEX_API_KEY || require("./../secrets.json").yandex;
 var querystring = require("querystring");
@@ -22,9 +21,7 @@ const translateSongLyrics = (songLyrics, callback) => {
     var songLines = reqText.split("<br>");
     var promiseChain = [];
 
-    
-    for (var line of songLines) {
-        
+    songLines.forEach((line) => {
         if (line != '') {
             var requestBody = {
                 text: removeHTMLTags(line),
@@ -37,20 +34,19 @@ const translateSongLyrics = (songLyrics, callback) => {
         else {
             console.log("Skipped line break");
         }
-    }
 
-    
+    })
+
     var combinedChain = [];
     Promise.all(promiseChain)
         .then((response) => {
 
-            
             var translationIndex = 0;
-            for (var i = 0; i < songLines.length; i++) {
-                if (songLines[i] != '') {
-                    console.log(response[translationIndex]);
+            songLines.forEach((songLine) => {
+                if (songLine != '') {
+                    /* console.log(response[translationIndex]); */
                     combinedChain.push({
-                        original: removeHTMLTags(songLines[i]),
+                        original: removeHTMLTags(songLine),
                         translation: response[translationIndex].data.text[0]
                     });
                     translationIndex++;
@@ -61,8 +57,7 @@ const translateSongLyrics = (songLyrics, callback) => {
                         translation: ''
                     });
                 }
-            }
-
+            })
             callback(combinedChain);
         },
         (error) => {
@@ -126,25 +121,24 @@ const translateSongLyricsFake = (songLyrics, callback) => {
     var reqText = optimizeDomForTranslation(songLyrics);
     var songLines = reqText.split("<br>");
 
-
     var songLineChain = [];
-        for (var line of songLines) {
-
-            if (removeHTMLTags(line) == "") {
-                songLineChain.push({
-                    original: "",
-                    translation: ""
-                })
-            }
-
-            else {
-                songLineChain.push({
-                    original: removeHTMLTags(line),
-                    translation: "t" + removeHTMLTags(line)
-                })
-            }
+    songLines.forEach((line) => {
+        if (removeHTMLTags(line) == "") {
+            songLineChain.push({
+                original: "",
+                translation: ""
+            })
         }
-        callback(songLineChain);
+
+        else {
+            songLineChain.push({
+                original: removeHTMLTags(line),
+                translation: "t" + removeHTMLTags(line)
+            })
+        }
+    })
+        
+    callback(songLineChain);
 }
 
 /*

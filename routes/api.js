@@ -39,7 +39,7 @@ router.get("/playback", (req, res) => {
                         genius.embedSongLyrics(songId, (songLyrics) => {
                             if (songLyrics) {
                                 
-                                translator.translateSongLyricsFake(songLyrics, (translatedLyrics) => {
+                                translator.translateSongLyrics(songLyrics, (translatedLyrics) => {
                                     if (translatedLyrics)
                                         res.json({
                                             "spotify": spotifyData,
