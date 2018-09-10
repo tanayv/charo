@@ -1,6 +1,8 @@
 # Charo :vhs:
 View and translate lyrics from your Spotify playback
 
+![The Charo Application](./docs/assets/charo.png)
+
 ## Using the Application
 
 ### Step 1/n: Creating a Spotify API Key
