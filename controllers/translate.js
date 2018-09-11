@@ -5,8 +5,9 @@
 */
 
 const axios = require("axios");
-const yandexApiKey = process.env.YANDEX_API_KEY || require("./../secrets.json").yandex;
+const yandexApiKey = process.env.YANDEX_API_KEY || require("./../secrets.json").YANDEX_API_KEY;
 var querystring = require("querystring");
+const translationKey = process.env.TRANSLATION_KEY || require("./../secrets.json").TRANSLATION_KEY;
 
 const translateSongLyrics = (songLyrics, callback) => {
     
@@ -25,7 +26,7 @@ const translateSongLyrics = (songLyrics, callback) => {
         if (line != '') {
             var requestBody = {
                 text: removeHTMLTags(line),
-                lang: 'fr-en'
+                lang: translationKey
             };
     
             var request = axios.post(endpoint, querystring.stringify(requestBody), config);

@@ -6,7 +6,7 @@
 
 const geniusModule = require("genius-api");
 const axios = require("axios");
-var geniusAccessToken = process.env.GENIUS_API_KEY || require("./../secrets.json").genius;
+var geniusAccessToken = process.env.GENIUS_SECRET || require("./../keys.json").GENIUS_SECRET;
 var genius = new geniusModule(geniusAccessToken);
 
 /**

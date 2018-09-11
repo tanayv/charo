@@ -4,7 +4,7 @@
  * Description: Contains functions that interact with the Spotify API
 */
 
-const spotifyClientId = process.env.SPOTIFY_CLIENT_ID || require("./../secrets.json").spotify;
+const spotifyClientId = process.env.SPOTIFY_CLIENT_ID || require("./../keys.json").SPOTIFY_CLIENT_ID;
 const axios = require("axios");
 
 /**
