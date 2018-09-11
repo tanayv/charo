@@ -48,17 +48,6 @@ This project requires Node and NPM to be installed.
 - Click on "Create a client ID", and follow through the tutorial by filling the necessary information.
 - Depending on your deployment configuration, store the API key in your config variables or ``keys.json`` file
 - Add the URL for server where your application is running to the list of Redirect URIs in the client settings.
-- Also, add the URL for your server configuration in the ``url`` const, in `` react -> src -> actions -> index.js ``, as shown in the example below. This instructs the frontend to include the callback URL in its request to the 
-    ```` 
-    /** In actions/index.js **/
-    
-    export const ...
-    export const ...
-
-    /* Make changes here (line 13) */
-    const url = "http://localhost:8000";
-
-    ````
 
 ### Step 3 of 5: Creating a Genius API Key
 - Go to Genius Developers API Client creation dashboard using [this link](https://genius.com/api-clients). (You need to create a Genius developer account which, similar to Spotify, just gets registered on top of your existing Genius account if you have one)
