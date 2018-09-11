@@ -10,7 +10,7 @@ export const AUTHENTICATED = 'AUTHENTICATED';
 export const GET_PLAYBACK_PAYLOAD = 'GET_PLAYBACK_PAYLOAD';
 export const SET_VIEW = 'SET_VIEW';
 
-const url = "http://localhost:8000";
+const url = window.location.hostname;
 
 /**
  * Creates action to obtain Spotify key from the backend

@@ -1,0 +1,7 @@
+{
+    "name": "Charo",
+    "description": "View and translate lyrics from your Spotify playback",
+    "repository": "https://github.com/tanayv/charo.git",
+    "logo": "https://node-js-sample.herokuapp.com/node.png",
+    "keywords": ["spotify", "playback", "translation"]
+  }
