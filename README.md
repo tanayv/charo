@@ -16,13 +16,22 @@ This project requires Node and NPM to be installed.
 
 
 #### Heroku
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/tanayv/charo.git)
+- You can deploy this application to Heroku using the button below
+
+    [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/tanayv/charo.git)
+
+- After deployment, you still need to set Config variables for the various API keys that you create in the steps that follow.
+
+- To create Config variables, in your application's Heroku dashboard, go to Settings. 
+
+- Here, click on Reveal Config Vars, and after entering all your API keys, it should look something like this: 
+
+![Heroku Config Vars](./docs/assets/heroku_config_vars.png)
 
 #### Local
 - Clone the repository using the following command
     ````
     git clone https://github.com/tanayv/charo.git
-
     ````
 
 - Install dependencies for the application
@@ -63,6 +72,8 @@ This project requires Node and NPM to be installed.
 - [Here](https://tech.yandex.com/translate/doc/dg/concepts/api-overview-docpage/#api-overview__languages) is a list of languages that the translation that the Yandex translate API supports.
 - Set the required language in the format of `'inputLang-outputLang'`. For example, for French to English translations I would use `'fr-en'`.
 
-## Dependencies
 
 ## Contributing
+Feel free to open an issue if the application doesn't work/deploy correctly.
+
+If you have any ideas or requests for features that this could have, consider opening an issue or pull request.
