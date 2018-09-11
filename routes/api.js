@@ -39,7 +39,7 @@ router.get("/playback", (req, res) => {
                         genius.embedSongLyrics(songId, (songLyrics) => {
                             if (songLyrics) {
                                 
-                                translator.translateSongLyrics(songLyrics, (translatedLyrics) => {
+                                translator.translateSongLyricsFake(songLyrics, (translatedLyrics) => {
                                     if (translatedLyrics)
                                         res.json({
                                             "spotify": spotifyData,
@@ -130,6 +130,16 @@ router.post("/auth/store", (req, res) => {
             success: false
         });
     }
+})
+
+
+/**
+ * Serve the API key on an API route for the frontend to be able to fetch
+ */
+router.get("/spotify/key", (req, res) => {
+    res.json({
+        "key": spotify.spotifyClientId
+    });
 })
 
 

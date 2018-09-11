@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { 
-    setRequestUrl,
+    getSpotifyKey,
     parseResponseUrl
 } from '../actions/index';
 import RouteHandler from './RouteHandler';
@@ -10,7 +10,7 @@ import RouteHandler from './RouteHandler';
 class Charo extends Component {
     constructor(props) {
         super(props);
-        props.setRequestUrl();
+        props.getSpotifyKey();
         props.parseResponseHashFragment();
     }
 
@@ -30,8 +30,8 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  setRequestUrl: () => {
-      dispatch(setRequestUrl());
+  getSpotifyKey: () => {
+      dispatch(getSpotifyKey());
   },
   parseResponseHashFragment: () => {
       dispatch(parseResponseUrl());

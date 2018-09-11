@@ -1,6 +1,7 @@
 
 import axios from 'axios';
 
+export const GET_SPOTIFY_KEY = 'GET_SPOTIFY_KEY';
 export const SET_REQUEST_URL = 'SET_REQUEST_URL';
 export const PARSE_RESPONSE_URL = 'PARSE_RESPONSE_URL';
 export const REQUEST_FAILED = 'REQUEST_FAILED';
@@ -12,13 +13,36 @@ export const SET_VIEW = 'SET_VIEW';
 const url = "http://localhost:8000";
 
 /**
- * Defines request parameters sent to the Spotify Authorization API by  setting the URL which is called once the authentication button is clicked
+ * Creates action to obtain Spotify key from the backend
  */
-export const setRequestUrl = () => {
+export const getSpotifyKey = () => {
+    return (dispatch) => {
+        axios.get(url + "/api/spotify/key")
+            .then(
+                (response) => {
+                        dispatch(setRequestUrl(response.data.key));
+                },
+                () => {
+                    dispatch({
+                        type: GET_SPOTIFY_KEY,
+                        data: {}
+                    });
+                }
+            )
+    }
+
+}
+
+/**
+ * Defines request parameters sent to the Spotify Authorization API by
+ * setting the URL which is called once the authentication button is clicked
+ * @param {string} spotifyKey 
+ */
+export const setRequestUrl = (spotifyKey) => {
     var loginConfig = {
         "baseUrl": "https://accounts.spotify.com/authorize",
         "urlParams": {
-            "client_id": "804e43256299432b8e9401998ec9e22b",
+            "client_id": spotifyKey,
             "redirect_uri": url + "/auth/callback/",
             "scope": "user-read-currently-playing user-read-playback-state",
             "response_type": "token",
@@ -99,7 +123,6 @@ export const storeAuthData = (authData) => {
  * Makes a GET request to the playback endpoint and receive all payloads from the backend
  */
 export const getPaybackPayload = () => {
-    console.log("Fetching playback data from backend");
     return (dispatch) => {
         axios.get(url + "/api/playback")
             .then(

@@ -4,7 +4,8 @@ import {
     PARSE_RESPONSE_URL,
     STORE_AUTH_DATA,
     GET_PLAYBACK_PAYLOAD,
-    SET_VIEW
+    SET_VIEW,
+    GET_SPOTIFY_KEY
 } from '../actions/index'
 
 function requestUrl(state = '', action) {
@@ -34,7 +35,7 @@ function authenticationStatus(state = '', action) {
     }
 }
 
-var playbackPayload = (state = '', action) => {
+const playbackPayload = (state = '', action) => {
     switch(action.type) {
         case GET_PLAYBACK_PAYLOAD:
             return action.data;
@@ -43,7 +44,7 @@ var playbackPayload = (state = '', action) => {
     }
 }
 
-var activeView = (state = 0, action) => {
+const activeView = (state = 0, action) => {
     switch(action.type) {
         case SET_VIEW:
             return action.newView;
@@ -52,12 +53,22 @@ var activeView = (state = 0, action) => {
     }
 }
 
+const spotifyKey = (state = '', action) => {
+    switch(action.type) {
+        case GET_SPOTIFY_KEY:
+            return action.data;
+        default:
+            return state;
+    }
+} 
+
 const rootReducer = combineReducers({
     requestUrl,
     parsedUrlData,
     authenticationStatus,
     playbackPayload,
-    activeView
+    activeView,
+    spotifyKey
 })
 
 export default rootReducer
