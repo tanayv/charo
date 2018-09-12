@@ -62,8 +62,8 @@ const embedSongLyrics = (songId, callback) => {
                 }
             }
 
-            console.log(counter + " dirty characters replaced");
-            console.log("Total characters:" + filteredData.length);
+            /*console.log(counter + " dirty characters replaced");
+            console.log("Total characters:" + filteredData.length);*/
 
             callback(filteredData);
         }, 
