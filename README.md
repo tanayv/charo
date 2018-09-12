@@ -11,9 +11,7 @@ You can still use this application by deploying it on your own with API keys of 
 
 This project requires Node and NPM to be installed. 
 
-
 ### Step 1 of 5: Deployment
-
 
 #### Heroku
 - You can deploy this application to Heroku using the button below
@@ -79,6 +77,6 @@ This project requires Node and NPM to be installed.
 
 
 ## Contributing
-Feel free to create an issue if the application doesn't work/deploy correctly.
+Feel free to create an issue if your application doesn't work/deploy correctly.
 
-If you have any ideas or requests for features that this could have, consider creating an issue or opening pull request.
+If you have any ideas or requests for features that this could have, consider creating an issue or opening a pull request.
