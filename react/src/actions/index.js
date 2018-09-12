@@ -10,16 +10,21 @@ export const AUTHENTICATED = 'AUTHENTICATED';
 export const GET_PLAYBACK_PAYLOAD = 'GET_PLAYBACK_PAYLOAD';
 export const SET_VIEW = 'SET_VIEW';
 
-const url = window.location.hostname;
-
 /**
  * Creates action to obtain Spotify key from the backend
  */
 export const getSpotifyKey = () => {
     return (dispatch) => {
+
+        let href = window.location.href;
+        let hrefArr = href.split("/");
+        let url = hrefArr[0] + "//" + hrefArr[2];
+
+        console.log(url + "/api/spotify/key");
         axios.get(url + "/api/spotify/key")
             .then(
                 (response) => {
+                        console.log(response);
                         dispatch(setRequestUrl(response.data.key));
                 },
                 () => {
@@ -39,6 +44,11 @@ export const getSpotifyKey = () => {
  * @param {string} spotifyKey 
  */
 export const setRequestUrl = (spotifyKey) => {
+
+    let href = window.location.href;
+    let hrefArr = href.split("/");
+    let url = hrefArr[0] + "//" + hrefArr[2];
+
     var loginConfig = {
         "baseUrl": "https://accounts.spotify.com/authorize",
         "urlParams": {
@@ -101,6 +111,11 @@ export const parseResponseUrl = () => {
  */
 export const storeAuthData = (authData) => {
     return (dispatch) => {
+
+        let href = window.location.href;
+        let hrefArr = href.split("/");
+        let url = hrefArr[0] + "//" + hrefArr[2];
+
         axios.post(url + "/api/auth/store", {authData: authData})
             .then(
                 (response) => {
@@ -124,6 +139,11 @@ export const storeAuthData = (authData) => {
  */
 export const getPaybackPayload = () => {
     return (dispatch) => {
+
+        let href = window.location.href;
+        let hrefArr = href.split("/");
+        let url = hrefArr[0] + "//" + hrefArr[2];
+
         axios.get(url + "/api/playback")
             .then(
                 (response) => {

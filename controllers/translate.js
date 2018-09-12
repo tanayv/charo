@@ -33,7 +33,7 @@ const translateSongLyrics = (songLyrics, callback) => {
             promiseChain.push(request);
         }
         else {
-            console.log("Skipped line break");
+            /*console.log("Skipped line break");*/
         }
 
     })

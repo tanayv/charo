@@ -57,22 +57,25 @@ This project requires Node and NPM to be installed.
 ### Step 2 of 5: Creating a Spotify Client ID
 - Go to the Spotify for Developers platform using [this link](https://developer.spotify.com/dashboard/#) and create a new account . (It's probably going to use your normal Spotify account if you haven't created an account already).
 - Click on "Create a client ID", and follow through the tutorial by filling the necessary information.
-- Depending on your deployment configuration, store the API key in your config variables or ``keys.json`` file
-- Add the URL for server where your application is running to the list of Redirect URIs in the client settings.
+- Depending on your deployment configuration, store this as the value for `SPOTIFY_CLIENT_ID` in your config variables or ``keys.json`` file
+- Add the URL for server where your application is running to the list of Redirect URIs in the client settings for the client on your Spotify developer dashboard.
 
 ### Step 3 of 5: Creating a Genius API Key
 - Go to Genius Developers API Client creation dashboard using [this link](https://genius.com/api-clients). (You need to create a Genius developer account which, similar to Spotify, just gets registered on top of your existing Genius account if you have one)
 - Create a new API client, and you should be able to access the "Client secret", which is what we need for this application.
+- Depending on your deployment configuration, store this as the value for `GENIUS_SECRET` in your config variables or ``keys.json`` file
 
 ### Step 4 of 5: Creating a Yandex Translate API Key
 - Go to the Yandex Translate Developers dashboard using [this link](https://translate.yandex.com/developers/keys), and create a new account. 
 - Create a new Translate API Key. 
+- Depending on your deployment configuration, store this as the value for `YANDEX_API_KEY` in your config variables or ``keys.json`` file
 
 
 ### Step 5 of 5: Setting Up Language Configuration
 - Currently, the application only does translation based on the settings defined in the config variables or keys.json file.
 - [Here](https://tech.yandex.com/translate/doc/dg/concepts/api-overview-docpage/#api-overview__languages) is a list of languages that the translation that the Yandex translate API supports.
 - Set the required language in the format of `'inputLang-outputLang'`. For example, for French to English translations I would use `'fr-en'`.
+- Depending on your deployment configuration, store this as the value for `TRANSLATION_KEY` in your config variables or ``keys.json`` file
 
 
 ## Contributing
