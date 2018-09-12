@@ -28,6 +28,8 @@ This project requires Node and NPM to be installed.
 
 ![Heroku Config Vars](./docs/assets/heroku_config_vars.png)
 
+- Your application will probably require a restart after the config vars have been set, and to do this, click on the 'More' dropdown next to the 'Open App' button, and select 'Restart all Dynos'.
+
 #### Local
 - Clone the repository using the following command
     ````
@@ -74,6 +76,6 @@ This project requires Node and NPM to be installed.
 
 
 ## Contributing
-Feel free to open an issue if the application doesn't work/deploy correctly.
+Feel free to create an issue if the application doesn't work/deploy correctly.
 
-If you have any ideas or requests for features that this could have, consider opening an issue or pull request.
+If you have any ideas or requests for features that this could have, consider creating an issue or opening pull request.
