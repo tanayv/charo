@@ -26,7 +26,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "genius-api": "^0.4.1",
     "npm": "^6.2.0",
     "path": "^0.12.7",
